@@ -1,0 +1,262 @@
+menu "Application Configuration"
+
+	menu "Device Setting"
+
+	config GPIO_RANGE_MAX
+		int
+		default 33 if IDF_TARGET_ESP32
+		default 46 if IDF_TARGET_ESP32S2
+		default 19 if IDF_TARGET_ESP32C3
+		default 48 if IDF_TARGET_ESP32S3
+
+	choice MODEL
+		prompt "Model"
+		default MODEL_MCP3002
+		help
+			Select model.
+		config MODEL_MCP3001
+			bool "MCP3001"
+			help
+				MCP3001
+		config MODEL_MCP3002
+			bool "MCP3002"
+			help
+				MCP3002
+		config MODEL_MCP3004
+			bool "MCP3004"
+			help
+				MCP3004
+		config MODEL_MCP3008
+			bool "MCP3008"
+			help
+				MCP3008
+		config MODEL_MCP3201
+			bool "MCP3201"
+			help
+				MCP3201
+		config MODEL_MCP3202
+			bool "MCP3202"
+			help
+				MCP3202
+		config MODEL_MCP3204
+			bool "MCP3204"
+			help
+				MCP3204
+		config MODEL_MCP3208
+			bool "MCP3208"
+			help
+				MCP3208
+		config MODEL_MCP3301
+			bool "MCP3301"
+			help
+				MCP3301
+		config MODEL_MCP3302
+			bool "MCP3302"
+			help
+				MCP3302
+		config MODEL_MCP3304
+			bool "MCP3304"
+			help
+				MCP3304
+	endchoice
+
+	choice INPUT
+		prompt "Input Configuration"
+		default INPUT_SINGLE
+		help
+			Select input configuration.
+		config INPUT_SINGLE
+			bool "Single-ended"
+			help
+				Single-ended input.
+		config INPUT_DIFF
+			bool "Differential"
+			help
+				Differential input.
+	endchoice
+
+	if INPUT_SINGLE
+
+		if MODEL_MCP3001 || MODEL_MCP3201 || MODEL_MCP3301
+			config CHANNEL0
+				bool "Enable IN+/IN-"
+				default y
+				help
+					Enable IN+/IN-.
+		endif
+
+		if MODEL_MCP3002 || MODEL_MCP3004 || MODEL_MCP3008 || MODEL_MCP3202 || MODEL_MCP3204 || MODEL_MCP3208 || MODEL_MCP3302 || MODEL_MCP3304
+			config CHANNEL0
+				bool "Enable Channel 0"
+				default y
+				help
+					Enable Channel 0.
+
+			config CHANNEL1
+				bool "Enable Channel 1"
+				default y
+				help
+					Enable Channel 1.
+		endif
+
+		if MODEL_MCP3004 || MODEL_MCP3008 || MODEL_MCP3204 || MODEL_MCP3208 || MODEL_MCP3302 || MODEL_MCP3304
+			config CHANNEL2
+				bool "Enable Channel 2"
+				default y
+				help
+					Enable Channel 2.
+
+			config CHANNEL3
+				bool "Enable Channel 3"
+				default y
+				help
+					Enable Channel 3.
+		endif
+
+		if MODEL_MCP3008 || MODEL_MCP3208 || MODEL_MCP3304
+			config CHANNEL4
+				bool "Enable Channel 4"
+				default y
+				help
+					Enable Channel 4.
+
+			config CHANNEL5
+				bool "Enable Channel 5"
+				default y
+				help
+					Enable Channel 5.
+
+			config CHANNEL6
+				bool "Enable Channel 6"
+				default y
+				help
+					Enable Channel 6.
+
+			config CHANNEL7
+				bool "Enable Channel 7"
+				default y
+				help
+					Enable Channel 7.
+		endif
+
+	endif
+
+	if INPUT_DIFF
+
+		if MODEL_MCP3001 || MODEL_MCP3201 || MODEL_MCP3301
+			config CHANNEL0
+				bool "Enable IN+/IN-"
+				default y
+				help
+					Enable IN+/IN-.
+		endif
+
+		if MODEL_MCP3002 || MODEL_MCP3004 || MODEL_MCP3008 || MODEL_MCP3202 || MODEL_MCP3204 || MODEL_MCP3208 || MODEL_MCP3302 || MODEL_MCP3304
+			config CHANNEL0
+				bool "Enable CH0 IN+/CH1 IN-"
+				default y
+				help
+					Enable CH0 IN+/CH1 IN-.
+
+			config CHANNEL1
+				bool "Enable CH0 IN-/CH1 IN+"
+				default y
+				help
+					Enable CH0 IN-/CH1 IN+.
+		endif
+
+		if MODEL_MCP3004 || MODEL_MCP3008 || MODEL_MCP3204 || MODEL_MCP3208 || MODEL_MCP3302 || MODEL_MCP3304
+			config CHANNEL2
+				bool "Enable CH2 IN+/CH3 IN-"
+				default y
+				help
+					Enable CH2 IN+/CH3 IN-.
+
+			config CHANNEL3
+				bool "Enable CH2 IN-/CH3 IN+"
+				default y
+				help
+					Enable CH2 IN-/CH3 IN+.
+		endif
+
+		if MODEL_MCP3008 || MODEL_MCP3208 || MODEL_MCP3304
+			config CHANNEL4
+				bool "Enable CH4 IN+/CH5 IN-"
+				default y
+				help
+					Enable CH4 IN+/CH5 IN-.
+
+			config CHANNEL5
+				bool "Enable CH4 IN-/CH5 IN+"
+				default y
+				help
+					Enable CH4 IN-/CH5 IN+.
+
+			config CHANNEL6
+				bool "Enable CH6 IN+/CH7 IN-"
+				default y
+				help
+					Enable CH6 IN+/CH7 IN-.
+
+			config CHANNEL7
+				bool "Enable CH6 IN-/CH7 IN+"
+				default y
+				help
+					Enable CH6 IN-/CH7 IN+.
+		endif
+
+
+	endif
+
+	endmenu
+
+	menu "SPI Setting"
+	
+	config MISO_GPIO
+		int "MISO GPIO number"
+		range 0 GPIO_RANGE_MAX
+		default 19 if IDF_TARGET_ESP32
+		default 33 if IDF_TARGET_ESP32S2
+		default 3  if IDF_TARGET_ESP32C3
+		help
+			GPIO number (IOxx) to SPI MISO.
+			Some GPIOs are used for other purposes (flash connections, etc.) and cannot be used to MISO.
+
+
+	config MOSI_GPIO
+		int "MOSI GPIO number"
+		range 0 GPIO_RANGE_MAX
+		default 23 if IDF_TARGET_ESP32
+		default 35 if IDF_TARGET_ESP32S2
+		default 0  if IDF_TARGET_ESP32C3
+		help
+			GPIO number (IOxx) to SPI MOSI.
+			Some GPIOs are used for other purposes (flash connections, etc.) and cannot be used to DC.
+			GPIOs 35-39 are input-only so cannot be used as outputs.
+
+	config SCLK_GPIO
+		int "SCLK GPIO number"
+		range 0 GPIO_RANGE_MAX
+		default 18 if IDF_TARGET_ESP32
+		default 36 if IDF_TARGET_ESP32S2
+		default 1  if IDF_TARGET_ESP32C3
+		help
+			GPIO number (IOxx) to SPI SCLK.
+			Some GPIOs are used for other purposes (flash connections, etc.) and cannot be used to DC.
+			GPIOs 35-39 are input-only so cannot be used as outputs.
+
+	config CS_GPIO
+		int "CS GPIO number"
+		range 0 GPIO_RANGE_MAX
+		default 5  if IDF_TARGET_ESP32
+		default 34 if IDF_TARGET_ESP32S2
+		default 5  if IDF_TARGET_ESP32C3
+		help
+			GPIO number (IOxx) to SPI CS.
+			When it is -1, CS isn't performed.
+			Some GPIOs are used for other purposes (flash connections, etc.) and cannot be used to CS.
+			GPIOs 35-39 are input-only so cannot be used as outputs.
+
+	endmenu
+
+endmenu
