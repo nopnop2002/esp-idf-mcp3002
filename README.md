@@ -2,6 +2,7 @@
 Driver for A/D converter with SPI serial interface.   
 esp-idf includes an ADC driver, but it cannot be used at the same time as the WiFi driver.   
 If you use it for a long time, you will lose your WiFi connection.   
+If you know how to solve this problem, please let me know.   
 
 # Supported converters
 |Model|Number of channels|Resolution|MinRange|MaxRange|
