@@ -101,10 +101,12 @@ int16_t mcpReadData(MCP_t * dev, int16_t channel)
 	memset(wbuf, 0, sizeof(rbuf));
 	memset(rbuf, 0, sizeof(rbuf));
 	if (dev->_model == MCP3002 || dev->_model == MCP3202) {
+		// MCP3002
 		// [IN]  00 00 00 START SGL/DIFF ODD/SIGN MSBF 
-		// [OUT] -- ----- ----- -------- -------- ---- 00 B9 B8 B7 B6 B5 B4 B3 B2 B1 B0
+		// [OUT] -- -- -- ----- -------- -------- ---- 00 B9 B8 B7 B6 B5 B4 B3 B2 B1 B0
+		// MCP3202
 		// [IN]  00 00 00 START SGL/DIFF ODD/SIGN MSBF 
-		// [OUT] -- ----- ----- -------- -------- ---- 00 B11 B10 B9 B8 B7 B6 B5 B4 B3 B2 B1 B0
+		// [OUT] -- -- -- ----- -------- -------- ---- 00 B11 B10 B9 B8 B7 B6 B5 B4 B3 B2 B1 B0
 		if (dev->_input == MCP_SINGLE) {
 			wbuf[0] = 0x18 | channel << 2;
 		} else {
@@ -112,10 +114,13 @@ int16_t mcpReadData(MCP_t * dev, int16_t channel)
 		}
 	} else if (dev->_model == MCP3004 || dev->_model == MCP3008 || dev->_model == MCP3204 || dev->_model == MCP3208 || dev->_model == MCP3302 || dev->_model == MCP3304) {
 		// Need DMY bit
+		// MCP300x
 		// [IN]  00 START SGL/DIFF D2 D1 D0 DMY
 		// [OUT] -- ----- -------- -- -- -- --- 00 B9 B8 B7 B6 B5 B4 B3 B2 B1 B0
+		// MCP320x
 		// [IN]  00 START SGL/DIFF D2 D1 D0 DMY
 		// [OUT] -- ----- -------- -- -- -- --- 00 B11 B10 B9 B8 B7 B6 B5 B4 B3 B2 B1 B0
+		// MCP330x
 		// [IN]  00 START SGL/DIFF D2 D1 D0 DMY
 		// [OUT] -- ----- -------- -- -- -- --- 00 SB B11 B10 B9 B8 B7 B6 B5 B4 B3 B2 B1 B0
 		if (dev->_input == MCP_SINGLE) {
@@ -127,10 +132,13 @@ int16_t mcpReadData(MCP_t * dev, int16_t channel)
 		// There is no START bit
 		// There is no SINGLE/DIFF
 		// 3'rd bit is NULL bit
+		// MCP3001
 		// [IN]  XX XX
 		// [OUT] -- -- 00 B9 B8 B7 B6 B5 B4 B3 B2 B1 B0
+		// MCP3201
 		// [IN]  XX XX
 		// [OUT] -- -- 00 B11 B10 B9 B8 B7 B6 B5 B4 B3 B2 B1 B0
+		// MCP3301
 		// [IN]  XX XX
 		// [OUT] -- -- 00 SB B11 B10 B9 B8 B7 B6 B5 B4 B3 B2 B1 B0
 		wbuf[0] = 0x00;
