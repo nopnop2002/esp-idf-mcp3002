@@ -101,10 +101,10 @@ int16_t mcpReadData(MCP_t * dev, int16_t channel)
 	memset(wbuf, 0, sizeof(rbuf));
 	memset(rbuf, 0, sizeof(rbuf));
 	if (dev->_model == MCP3002 || dev->_model == MCP3202) {
-		// 00 00 00 START SGL/DIFF ODD/SIGN MSBF 
-		//																			 00 B9 B8 B7 B6 B5 B4 B3 B2 B1 B0
-		// 00 00 00 START SGL/DIFF ODD/SIGN MSBF 
-		//																			 00 B11 B10 B9 B8 B7 B6 B5 B4 B3 B2 B1 B0
+		// [IN]  00 00 00 START SGL/DIFF ODD/SIGN MSBF 
+		// [OUT] -- ----- ----- -------- -------- ---- 00 B9 B8 B7 B6 B5 B4 B3 B2 B1 B0
+		// [IN]  00 00 00 START SGL/DIFF ODD/SIGN MSBF 
+		// [OUT] -- ----- ----- -------- -------- ---- 00 B11 B10 B9 B8 B7 B6 B5 B4 B3 B2 B1 B0
 		if (dev->_input == MCP_SINGLE) {
 			wbuf[0] = 0x18 | channel << 2;
 		} else {
@@ -112,12 +112,12 @@ int16_t mcpReadData(MCP_t * dev, int16_t channel)
 		}
 	} else if (dev->_model == MCP3004 || dev->_model == MCP3008 || dev->_model == MCP3204 || dev->_model == MCP3208 || dev->_model == MCP3302 || dev->_model == MCP3304) {
 		// Need DMY bit
-		// 00 START SGL/DIFF D2 D1 D0 DMY
-		//																00 B9 B8 B7 B6 B5 B4 B3 B2 B1 B0
-		// 00 START SGL/DIFF D2 D1 D0 DMY
-		//																00 B11 B10 B9 B8 B7 B6 B5 B4 B3 B2 B1 B0
-		// 00 START SGL/DIFF D2 D1 D0 DMY
-		//																00 SB B11 B10 B9 B8 B7 B6 B5 B4 B3 B2 B1 B0
+		// [IN]  00 START SGL/DIFF D2 D1 D0 DMY
+		// [OUT] -- ----- -------- -- -- -- --- 00 B9 B8 B7 B6 B5 B4 B3 B2 B1 B0
+		// [IN]  00 START SGL/DIFF D2 D1 D0 DMY
+		// [OUT] -- ----- -------- -- -- -- --- 00 B11 B10 B9 B8 B7 B6 B5 B4 B3 B2 B1 B0
+		// [IN]  00 START SGL/DIFF D2 D1 D0 DMY
+		// [OUT] -- ----- -------- -- -- -- --- 00 SB B11 B10 B9 B8 B7 B6 B5 B4 B3 B2 B1 B0
 		if (dev->_input == MCP_SINGLE) {
 			wbuf[0] = 0x60 | channel << 2;
 		} else {
@@ -127,12 +127,12 @@ int16_t mcpReadData(MCP_t * dev, int16_t channel)
 		// There is no START bit
 		// There is no SINGLE/DIFF
 		// 3'rd bit is NULL bit
-		// XX XX
-		//			 00 B9 B8 B7 B6 B5 B4 B3 B2 B1 B0
-		// XX XX
-		//			 00 B11 B10 B9 B8 B7 B6 B5 B4 B3 B2 B1 B0
-		// XX XX
-		//			 00 SB B11 B10 B9 B8 B7 B6 B5 B4 B3 B2 B1 B0
+		// [IN]  XX XX
+		// [OUT] -- -- 00 B9 B8 B7 B6 B5 B4 B3 B2 B1 B0
+		// [IN]  XX XX
+		// [OUT] -- -- 00 B11 B10 B9 B8 B7 B6 B5 B4 B3 B2 B1 B0
+		// [IN]  XX XX
+		// [OUT] -- -- 00 SB B11 B10 B9 B8 B7 B6 B5 B4 B3 B2 B1 B0
 		wbuf[0] = 0x00;
 	}
 	ESP_LOGD(TAG, "wbuf=0x%02X 0x%02X", wbuf[0], wbuf[1]);
