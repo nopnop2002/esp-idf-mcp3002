@@ -1,8 +1,7 @@
 # esp-idf-mcp3002
 Driver for A/D converter with SPI serial interface.   
-esp-idf includes an ADC driver, but it cannot be used at the same time as the WiFi driver.   
-If you use it for a long time, you will lose your WiFi connection.   
-If you know how to solve this problem, please let me know.   
+esp-idf includes an ADC driver, but the convertible voltage is up to 3.3V.   
+By giving Vref properly, it is possible to convert higher voltages.   
 
 # Supported converters
 |Model|Number of channels|Resolution|MinRange|MaxRange|
