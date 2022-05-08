@@ -1,7 +1,8 @@
 # esp-idf-mcp3002
 Driver for A/D converter with SPI serial interface.   
 esp-idf includes an ADC driver, but the convertible voltage is up to 3.3V.   
-By giving Vref properly, it is possible to convert higher voltages.   
+By giving Vref appropriately and level-shifting MOSI and SCK, Higher voltages can be converted.   
+For example, when converting 5V, High Level Input Voltage of MOSI and SCK must be 0.7*5V=3.5V or higher.   
 
 # Supported converters
 |Model|Number of channels|Resolution|MinRange|MaxRange|
