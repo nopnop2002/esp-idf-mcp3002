@@ -69,7 +69,7 @@ Previously it was called HSPI_HOST / VSPI_HOST, but now it is called SPI2_HOST /
 |MISO|--|GPIO19|GPIO33|GPIO4||
 |SCK|--|GPIO18|GPIO36|GPIO5||
 |MOSI|--|GPIO23|GPIO35|GPIO6|*1|
-|CS|--|GPIO5|GPIO34|GPIO5||
+|CS|--|GPIO5|GPIO34|GPIO7||
 |Vdd|--|3.3V|3.3V|3.3V||
 |Vss|--|GND|GND|GND||
 
