@@ -11,12 +11,21 @@
 
 #define TAG "MCP3002"
 
+#if 0
 #ifdef CONFIG_IDF_TARGET_ESP32
 #define LCD_HOST HSPI_HOST
 #elif defined CONFIG_IDF_TARGET_ESP32S2
 #define LCD_HOST SPI2_HOST
 #elif defined CONFIG_IDF_TARGET_ESP32C3
 #define LCD_HOST SPI2_HOST
+#endif
+#endif
+
+// SPI Stuff
+#if CONFIG_SPI2_HOST
+#define HOST_ID SPI2_HOST
+#elif CONFIG_SPI3_HOST
+#define HOST_ID SPI3_HOST
 #endif
 
 void mcpInit(MCP_t * dev, int16_t model, int16_t GPIO_MISO, int16_t GPIO_MOSI, int16_t GPIO_SCLK, int16_t GPIO_CS, int16_t input)
@@ -38,7 +47,7 @@ void mcpInit(MCP_t * dev, int16_t model, int16_t GPIO_MISO, int16_t GPIO_MOSI, i
 		.quadhd_io_num = -1
 	};
 
-	ret = spi_bus_initialize( LCD_HOST, &buscfg, SPI_DMA_CH_AUTO );
+	ret = spi_bus_initialize( HOST_ID, &buscfg, SPI_DMA_CH_AUTO );
 	ESP_LOGD(TAG, "spi_bus_initialize=%d",ret);
 	assert(ret==ESP_OK);
 
@@ -51,7 +60,7 @@ void mcpInit(MCP_t * dev, int16_t model, int16_t GPIO_MISO, int16_t GPIO_MOSI, i
 	};
 
 	spi_device_handle_t handle;
-	ret = spi_bus_add_device( LCD_HOST, &devcfg, &handle);
+	ret = spi_bus_add_device( HOST_ID, &devcfg, &handle);
 	ESP_LOGD(TAG, "spi_bus_add_device=%d",ret);
 	assert(ret==ESP_OK);
 	dev->_handle = handle;

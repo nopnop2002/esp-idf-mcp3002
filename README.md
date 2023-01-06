@@ -20,15 +20,15 @@ For example, when converting 5V, High Level Input Voltage of MOSI and SCK must b
 |MCP3304|8|12Bits+Sign|-4095|4095|
 
 # Software requirements
-esp-idf v4.4 or later.   
-This is because this version supports ESP32-C3.   
+ESP-IDF V4.4/V5.0.   
+ESP-IDF V5 is required when using ESP32-C2.   
 
 
 # Installation
 ```Shell
 git clone https://github.com/nopnop2002/esp-idf-mcp3002
 cd esp-idf-mcp3002/
-idf.py set-target {esp32/esp32s2/esp32c3}
+idf.py set-target {esp32/esp32s2/esp32s3/esp32c2/esp32c3}
 idf.py menuconfig
 idf.py flash
 ```
@@ -49,15 +49,26 @@ I used a raw ESP-C3-13 to verify that these pins could be used as SPI clocks.
 ![config-device-3](https://user-images.githubusercontent.com/6020549/157990689-2a7484ce-88ae-4e4f-9bc2-46b32973fb16.jpg)
 
 ## SPI Setting
-![config-spi](https://user-images.githubusercontent.com/6020549/157990782-388f121a-ac8b-4c04-91b6-1261451ef041.jpg)
+![config-spi-1](https://user-images.githubusercontent.com/6020549/211113887-027f8ec0-74c8-4427-b5ab-c59a4997b24a.jpg)
+
+# SPI BUS selection   
+![config-spi-2](https://user-images.githubusercontent.com/6020549/211113850-35a5a9a4-1dc1-460b-98da-5ca63e4ef558.jpg)
+
+The ESP32 series has three SPI BUSs.   
+SPI1_HOST is used for communication with Flash memory.   
+You can use SPI2_HOST and SPI3_HOST freely.   
+When you use SDSPI(SD Card via SPI), SDSPI uses SPI2_HOST BUS.   
+When using this module at the same time as SDSPI or other SPI device using SPI2_HOST, it needs to be changed to SPI3_HOST.   
+When you don't use SDSPI, both SPI2_HOST and SPI3_HOST will work.   
+Previously it was called HSPI_HOST / VSPI_HOST, but now it is called SPI2_HOST / SPI3_HOST.   
 
 
 # Wirering
-|MCP3xxx||ESP32|ESP32-S2|ESP32-C3||
+|MCP3xxx||ESP32|ESP32-S2/S3|ESP32-C2/C3||
 |:-:|:-:|:-:|:-:|:-:|:-:|
-|MISO|--|GPIO19|GPIO33|GPIO3||
-|MOSI|--|GPIO23|GPIO35|GPIO0|*1|
-|SCK|--|GPIO18|GPIO36|GPIO1||
+|MISO|--|GPIO19|GPIO33|GPIO4||
+|SCK|--|GPIO18|GPIO36|GPIO5||
+|MOSI|--|GPIO23|GPIO35|GPIO6|*1|
 |CS|--|GPIO5|GPIO34|GPIO5||
 |Vdd|--|3.3V|3.3V|3.3V||
 |Vss|--|GND|GND|GND||
