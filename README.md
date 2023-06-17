@@ -21,7 +21,7 @@ For example, when converting 5V, High Level Input Voltage of MOSI and SCK must b
 
 # Software requirements
 ESP-IDF V4.4/V5.0.   
-ESP-IDF V5 is required when using ESP32-C2.   
+ESP-IDF V5.0 is required when using ESP32-C2.   
 
 
 # Installation
