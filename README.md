@@ -6,19 +6,19 @@ For example, when converting 5V, High Level Input Voltage of MOSI and SCK must b
 And the high level output voltage of MISO will be 4.1V or higher.   
 
 # Supported converters
-|Model|Number of channels|Resolution|MinValue|MaxValue|
-|:-:|:-:|:-:|:-:|:-:|
-|MCP3001|1|10Bits|0|1023|
-|MCP3002|2|10Bits|0|1023|
-|MCP3004|4|10Bits|0|1023|
-|MCP3008|8|10Bits|0|1023|
-|MCP3201|1|12Bits|0|4095|
-|MCP3202|2|12Bits|0|4095|
-|MCP3204|4|12Bits|0|4095|
-|MCP3208|8|12Bits|0|4095|
-|MCP3301|1|12Bits+Sign|-4095|4095|
-|MCP3302|4|12Bits+Sign|-4095|4095|
-|MCP3304|8|12Bits+Sign|-4095|4095|
+|Model|Number of channels|Resolution|MinValue|MaxValue|Operating voltage|
+|:-:|:-:|:-:|:-:|:-:|:-:|
+|MCP3001|1|10Bits|0|1023|2.7V - 5.5V|
+|MCP3002|2|10Bits|0|1023|2.7V - 5.5V|
+|MCP3004|4|10Bits|0|1023|2.7V - 5.5V|
+|MCP3008|8|10Bits|0|1023|2.7V - 5.5V|
+|MCP3201|1|12Bits|0|4095|2.7V - 5.5V|
+|MCP3202|2|12Bits|0|4095|2.7V - 5.5V|
+|MCP3204|4|12Bits|0|4095|2.7V - 5.5V|
+|MCP3208|8|12Bits|0|4095|2.7V - 5.5V|
+|MCP3301|1|12Bits+Sign|-4095|4095|4.5V - 5.5V|
+|MCP3302|4|12Bits+Sign|-4095|4095|4.5V - 5.5V|
+|MCP3304|8|12Bits+Sign|-4095|4095|4.5V - 5.5V|
 
 # Software requirements
 ESP-IDF V4.4/V5.x.   
