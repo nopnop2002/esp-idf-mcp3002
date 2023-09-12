@@ -2,10 +2,10 @@
 Driver for A/D converter with SPI serial interface.   
 esp-idf includes an ADC driver, but the convertible voltage is up to 3.3V.   
 By giving Vref appropriately and level-shifting MOSI and SCK, Higher voltages can be converted.   
-For example, when converting 5V, High Level Input Voltage of MOSI and SCK must be 0.7*5V=3.5V or higher.   
+For example, when converting 5V, the high level input voltage of MOSI and SCK will be 0.7*5V=3.5V or higher.   
 
 # Supported converters
-|Model|Number of channels|Resolution|MinRange|MaxRange|
+|Model|Number of channels|Resolution|MinValue|MaxValue|
 |:-:|:-:|:-:|:-:|:-:|
 |MCP3001|1|10Bits|0|1023|
 |MCP3002|2|10Bits|0|1023|
@@ -20,15 +20,16 @@ For example, when converting 5V, High Level Input Voltage of MOSI and SCK must b
 |MCP3304|8|12Bits+Sign|-4095|4095|
 
 # Software requirements
-ESP-IDF V4.4/V5.0.   
+ESP-IDF V4.4/V5.x.   
 ESP-IDF V5.0 is required when using ESP32-C2.   
+ESP-IDF V5.1 is required when using ESP32-C6.   
 
 
 # Installation
 ```Shell
 git clone https://github.com/nopnop2002/esp-idf-mcp3002
 cd esp-idf-mcp3002/
-idf.py set-target {esp32/esp32s2/esp32s3/esp32c2/esp32c3}
+idf.py set-target {esp32/esp32s2/esp32s3/esp32c2/esp32c3/esp32c6}
 idf.py menuconfig
 idf.py flash
 ```
@@ -66,10 +67,10 @@ Previously it was called HSPI_HOST / VSPI_HOST, but now it is called SPI2_HOST /
 # Wirering
 |MCP3xxx||ESP32|ESP32-S2/S3|ESP32-C2/C3||
 |:-:|:-:|:-:|:-:|:-:|:-:|
-|MISO|--|GPIO19|GPIO33|GPIO4||
-|SCK|--|GPIO18|GPIO36|GPIO5||
-|MOSI|--|GPIO23|GPIO35|GPIO6|*1|
-|CS|--|GPIO5|GPIO34|GPIO7||
+|MISO|--|GPIO19|GPIO37|GPIO4||
+|SCK|--|GPIO18|GPIO36|GPIO3||
+|MOSI|--|GPIO23|GPIO35|GPIO2|*1|
+|CS|--|GPIO5|GPIO34|GPIO1||
 |Vdd|--|3.3V|3.3V|3.3V||
 |Vss|--|GND|GND|GND||
 
