@@ -3,6 +3,10 @@
 
 #include "driver/spi_master.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef struct {
 	int _model;
 	int	_bits;
@@ -36,6 +40,10 @@ enum MCP_INPUT {
 
 void mcpInit(MCP_t * dev, int16_t model, int16_t GPIO_MISO, int16_t GPIO_MOSI, int16_t GPIO_SCLK, int16_t GPIO_CS, int16_t input);
 int16_t mcpReadData(MCP_t * dev, int16_t channel);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* MAIN_MCP3002_H_ */
 
