@@ -1,4 +1,4 @@
-menu "Application Configuration"
+menu "MCP3002 Configuration"
 
 	menu "Device Setting"
 

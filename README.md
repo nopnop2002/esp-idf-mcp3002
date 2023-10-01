@@ -42,7 +42,7 @@ I used a raw ESP-C3-13 to verify that these pins could be used as SPI clocks.
 
 # Configuration   
 
-![config-top](https://user-images.githubusercontent.com/6020549/157990108-4b4dafde-4c32-45e6-92b1-32eb39b94d58.jpg)
+![config-top](https://github.com/nopnop2002/esp-idf-mcp3002/assets/6020549/2210d655-57ca-4511-9588-7c7a291007cf)
 ![config-app](https://user-images.githubusercontent.com/6020549/157990185-fa6beb49-a6fb-471b-87e5-41394b045868.jpg)
 
 ## Device Setting
