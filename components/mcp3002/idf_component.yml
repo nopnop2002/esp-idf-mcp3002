@@ -1,0 +1,6 @@
+license: "MIT"
+description: Driver for A/D converter with SPI serial interface
+url: https://github.com/nopnop2002/esp-idf-mcp3002/
+issues: https://github.com/nopnop2002/esp-idf-mcp3002/issues
+documentation: https://github.com/nopnop2002/esp-idf-mcp3002/tree/main/README.md
+repository: https://github.com/nopnop2002/esp-idf-mcp3002.git
