@@ -53,7 +53,7 @@ I used a raw ESP-C3-13 to verify that these pins could be used as SPI clocks.
 ## SPI Setting
 ![config-spi-1](https://user-images.githubusercontent.com/6020549/211113887-027f8ec0-74c8-4427-b5ab-c59a4997b24a.jpg)
 
-# SPI BUS selection   
+## SPI BUS selection   
 ![config-spi-2](https://user-images.githubusercontent.com/6020549/211113850-35a5a9a4-1dc1-460b-98da-5ca63e4ef558.jpg)
 
 The ESP32 series has three SPI BUSs.   
