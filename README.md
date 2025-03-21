@@ -85,3 +85,28 @@ See the data sheet for details.
 ![stdout](https://user-images.githubusercontent.com/6020549/157990842-77d6ee7c-c518-4d1d-94ec-283badc7fe34.jpg)
 
 
+# How to use this component in your project   
+Create idf_component.yml in the same directory as main.c.   
+```
+YourProject --+-- CMakeLists.txt
+              +-- main --+-- main.c
+                         +-- CMakeLists.txt
+                         +-- idf_component.yml
+```
+
+Contents of idf_component.yml.
+```
+dependencies:
+  nopnop2002/mcp3002:
+    path: components/mcp3002/
+    git: https://github.com/nopnop2002/esp-idf-mcp3002.git
+```
+
+When you build a projects esp-idf will automaticly fetch repository to managed_components dir and link with your code.   
+```
+YourProject --+-- CMakeLists.txt
+              +-- main --+-- main.c
+              |          +-- CMakeLists.txt
+              |          +-- idf_component.yml
+              +-- managed_components ----- nopnop2002__mcp3002
+```
